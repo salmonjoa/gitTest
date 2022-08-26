@@ -1,0 +1,160 @@
+.app {
+  text-align: center;
+  background-color: coral;
+  padding: 15px;
+  margin-bottom: 5px;
+}
+.name{
+  color: white;
+  text-align: center;
+}
+.var{
+  margin: 30px;
+  margin-bottom: 0%;
+  text-decoration: none;
+  font-size: 20px;
+}
+.main-bg {
+  height : 300px;
+  background-image : url('./food.jpg');
+  background-size : cover;
+  background-position : center;
+}
+.list{
+  padding-left: 20px;
+  padding-right: 10px;
+  text-align: left;
+  border-bottom: 1px solid grey;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+.close{
+  width: 25px;
+  border: none;
+}
+.date{
+  font-size: 15px;
+  text-align: right;
+  font-style: italic;
+  padding: 0%;
+}
+.nameD{
+  text-align: center;
+}
+.title{
+  text-decoration: none;
+  color: black;
+  padding-top: 30px;
+}
+small{
+  font-size: 20px;
+  text-align: right;
+}
+.small{
+  font-size: 20px;
+  text-align: right;
+}
+.row{
+  width: auto;
+  margin: auto;
+}
+
+.menubar{
+  margin:auto;
+}
+.write{
+  text-align: center;
+  padding-right: 10px;
+  margin-top: 30px;
+}
+.right{
+  text-align: right;
+  margin: 5px;
+}
+.back{
+  margin-left: 10px;
+}
+.vertical{
+  margin-left: 30px;
+  margin-top: 10px;
+}
+.info{
+  padding: 10px;
+  font-size: 20px;
+  margin: 25px;
+  margin-bottom: 10px;
+}
+.all{
+  width: 60%;
+  margin: auto;
+}
+.floatL{
+  float: left;
+  margin: auto;
+  width: 20%;
+  text-align: left;
+}
+.floatR{
+  float: left;
+  width: 80%;
+  text-align: center;
+}
+.comm{
+  margin: auto;
+  margin-top: 30px;
+  width: 80%;
+}
+.cnxl{
+  background-color: white;
+  color: coral;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.ok{
+  background-color: coral;
+  color: white;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.blind{
+  color: white;
+}
+.smallL{
+  float: left;
+  width: 20%;
+}
+.smallR{
+  float: left;
+  width: 80%;
+  text-align: left;
+}
+.inlinePic{
+  display: inline-block;
+  width: 30%;
+  margin: 1em;
+}
+.close{
+  text-align: right;
+}
+.black{
+  color: black;
+}
+.black:hover{
+  color: salmon;
+}
+.titleD:hover{
+  color: salmon;
+}
+.titleD, .searchI{
+  display: inline-block;
+}
+.searchI{
+  height: 35px;
+  width: 400px;
+}
+.searchB{
+  background-color: coral;
+  height: 35px;
+  width: 60px;
+  border-style:initial;
+}
