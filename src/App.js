@@ -1,22 +1,19 @@
 import './App.css'
-import { Nav, Container, Navbar, Button } from 'react-bootstrap'
+import { Nav, Container, Navbar } from 'react-bootstrap'
 import { Routes, Route, useNavigate} from 'react-router-dom'
 import Detail from './page/Detail'
-import {useState} from 'react'
-import {cLike} from './store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import Mypage from './page/Mypage'
 import Mylike from './page/Mylike'
-import Information from './page/Information'
-
+import EditInfo from './page/EditInfo';
+import List from './page/List'
 
 function App() {
 
   let navigate = useNavigate();
   let dispatch = useDispatch();
   let recipedata = useSelector((state)=>state.tmpdata);
-  let [like, setLike] = useState(false);
-
+  
   return (
     <div>
       <div className='app'>
@@ -35,46 +32,17 @@ function App() {
           </Container>
         </Navbar>
       </div>
-
           <Routes>
             <Route path="/" element={ <div className="main-bg"></div> }/>
-            <Route path="/detail" element={
-              <div>
-                <div className='write'>
-                  <input type='text' className='searchI' ></input>
-                  <span className='blind'>-</span>
-                  <button className='searchB'>검색</button>
-                </div>
-                {
-                recipedata.map((a, i)=> 
-                    <div className='list' key={i}>
-                      <h3 className='title' onClick={()=>{
-                        navigate('/detail/'+ a.id)
-                      }}>
-                        <div className='titleD'>{i+1}. {recipedata[i].title}</div>
-                        <small onClick={(e)=>{
-                          e.stopPropagation();
-                          setLike(!like)
-                        }}> 
-                        <span>{
-                          like == true ? '❤️' : '🤍'
-                        }</span> 
-                        {recipedata[i].dish_like}</small>
-                        <small> 😋{recipedata[i].ate}</small>
-                      </h3>
-                      <p className='date'>{recipedata[i].date}</p>
-                    </div>
-                  )
-                }
-              </div>
-              }/>
+            <Route path="/detail" element={<List/>}/>
             <Route path="/detail/:id" element={ <Detail/>}/>
             <Route path="/mypage/*" element={<Mypage/>}/>
             <Route path="/mylike" element={<Mylike/>}/>
+            <Route path="/editinfo" element={<EditInfo/>}/>
           </Routes>
-      
     </div>
   );
 }
+
 
 export default App;

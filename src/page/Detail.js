@@ -1,13 +1,9 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import {cLike} from './../store/store';
-import Nav from 'react-bootstrap/Nav';
+import { Nav, Button } from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 
 function Detail(props) {
-  // let item = props.recipe.find(function(item){
-  //   return item.id == id
-  // });
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -16,15 +12,18 @@ function Detail(props) {
   let [영상, set영상] = useState('url입니다.');
   let [tab, setTab] = useState(0);
   let recipedata = useSelector((state)=>state.tmpdata);
+  let [like, setLike] = useState(false);
 
   let {id} = useParams();
   let infodata = recipedata.find(function(info){
     return info.id == id 
   })
 
+  
   return (
+    
     <>
-      <button className='back' onClick={()=>{navigate("/detail")}}>목록보기</button>
+      <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
       <div className="container">
           <div className='all'>
             <h1 className='nameD'>{infodata.title}</h1>
@@ -35,14 +34,26 @@ function Detail(props) {
             <div className='middle'>
               <img src='./../image/신라면.jpg' width="100%" /><br/>
             <div className='small'>
-              <span onClick={()=>{
-              dispatch(cLike())
-              }}> ❤️{infodata.dish_like}</span>
+
+              <span onClick={(e)=>{
+                e.stopPropagation()
+                setLike(!like)
+                console.log(like)
+              }}>
+                  {
+                    like === true ? '❤️' : '🤍'
+                  }
+                  {
+                    like === true ?
+                    infodata.dish_like +1
+                    : infodata.dish_like
+                  }
+                </span>
               <span className='small'> 😋{infodata.ate}</span>
             </div><br/>
             </div>
 
-            <Nav variant="tabs"  defaultActiveKey="link0">
+            <Nav variant="tabs" defaultActiveKey="link0">
               <Nav.Item>
                 <Nav.Link eventKey="link0" onClick={()=>{
                 setTab(0)
