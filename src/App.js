@@ -7,6 +7,9 @@ import Mypage from './page/Mypage'
 import Mylike from './page/Mylike'
 import EditInfo from './page/EditInfo';
 import List from './page/List'
+import Main from './Main/Main'
+import Square from './Square/Square'
+import Header from './layouts/Header'
 
 function App() {
 
@@ -18,8 +21,12 @@ function App() {
     <div>
       <div className='app'>
       <h1 className='name' onClick={() => {navigate('/')}}>Recipe(가제)</h1>
+      <div className='login'>
+        <Header />
+      </div>
         <Navbar>
           <Container>
+            
             <div className='menubar'>
               <Nav>
                 <Nav.Link className='var' onClick={() => {navigate('/')}}><strong>Home🏠</strong></Nav.Link>
@@ -33,8 +40,9 @@ function App() {
         </Navbar>
       </div>
           <Routes>
-            <Route path="/" element={ <div className="main-bg"></div> }/>
+            <Route path="/" element={ <Main/>}/>
             <Route path="/detail" element={<List/>}/>
+            <Route path="/card" element={<Square/>}/>
             <Route path="/detail/:id" element={ <Detail/>}/>
             <Route path="/mypage/*" element={<Mypage/>}/>
             <Route path="/mylike" element={<Mylike/>}/>
@@ -43,6 +51,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

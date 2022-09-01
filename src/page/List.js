@@ -1,29 +1,12 @@
 import './../App.css';
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
 import Pagination from 'react-js-pagination';
 
-const Paging = () => {
-  const [page, setPage] = useState(1);
-  const handlePageChange = (page) => {
-    setPage(page);
-    console.log(page);
-  };
-  return (
-    <Pagination
-      activePage={page}           // 현재페이지
-      itemsCountPerPage={5}      // 한 페이지당 보여줄 리스트 아이템의 개수
-      totalItemsCount={450}       // 총 아이템의 개수
-      pageRangeDisplayed={5}      // Paginator 내에서 보여줄 페이지의 범위
-      // prevPageText={"‹"}
-      // nextPageText={"›"}
-      onChange={handlePageChange} // 페이지가 바뀔 때 핸들링해줄 함수
-    />
-  );
-};
+
 
 function List (){
   let recipedata = useSelector((state)=>state.tmpdata);
@@ -36,27 +19,26 @@ function List (){
     setValueState(value)
   }
   
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState(recipedata);
 
   function handleInput(event) {
     const input = event.target.value;
     const mydata = recipedata.filter((recipe) => {
       // return recipe.title.toLowerCase().includes(input.toLowerCase());
-      if(valueState === '0')
-        return recipe.title.toLowerCase().includes(input.toLowerCase());
       if(valueState === '1')
         return recipe.writer.toLowerCase().includes(input.toLowerCase());
-      if(valueState === '2')
+      else if(valueState === '2')
         return recipe.date.toLowerCase().includes(input.toLowerCase());
-    });
+      else
+        return recipe.title.toLowerCase().includes(input.toLowerCase());
+      });
     if (input === '') {
       setFilteredData(recipedata);
     } else {
       setFilteredData(mydata);
     }
   }
-
-
+  
   return(
     <div className='detailList'>
       <div className='write'>
@@ -77,7 +59,18 @@ function List (){
             {filteredData.slice(0, 15).map((a, i) => {
               return (
                 <TreeItem
-                  // nodeId={}
+                  nodeId={
+                  <div className='list' key={i}>
+                    <h3 className='title' onClick={()=>{
+                      navigate('/detail/'+ a.id)
+                      }}>
+                      <div className='titleD'>{i+1}. {filteredData[i].title}</div>
+                      <small> ❤️{filteredData[i].dish_like}</small>
+                      <small> 😋{filteredData[i].ate}</small>
+                    </h3>
+                    <p className='date'>{filteredData[i].writer} | {filteredData[i].date}</p>
+                  </div>
+                  }
                   label={
                   <div className='list' key={i}>
                     <h3 className='title' onClick={()=>{
@@ -97,23 +90,26 @@ function List (){
         )}
       </div>
       <Pagination/>
-      {/* {
-      recipedata.map((a, i)=> 
-        <div className='list' key={i}>
-          <h3 className='title' onClick={()=>{
-            navigate('/detail/'+ a.id)
-            }}>
-            <div className='titleD'>{i+1}. {recipedata[i].title}</div>
-            
-            <small> ❤️{recipedata[i].dish_like}</small>
-            <small> 😋{recipedata[i].ate}</small>
-          </h3>
-          <p className='date'>{recipedata[i].date}</p>
-        </div>
-        )
-      } */}
+      
     </div>
   )
 }
+
+const Paging = () => {
+  const [page, setPage] = useState(1);
+  const handlePageChange = (page) => {
+    setPage(page);
+    console.log(page);
+  };
+  return (
+    <Pagination
+      activePage={page}           // 현재페이지
+      itemsCountPerPage={5}       // 한 페이지당 보여줄 리스트 아이템의 개수
+      totalItemsCount={450}       // 총 아이템의 개수
+      pageRangeDisplayed={5}      // Paginator 내에서 보여줄 페이지의 범위
+      onChange={handlePageChange} // 페이지가 바뀔 때 핸들링해줄 함수
+    />
+  );
+};
 
 export default List;
