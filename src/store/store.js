@@ -1,5 +1,6 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
+
 // let like = createSlice({
 //   name : 'like',
 //   initialState : 0,
@@ -9,6 +10,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
   //   }
   // }
 // })
+
 
 let tmpdata = createSlice({
   name : 'recipe',

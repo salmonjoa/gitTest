@@ -12,12 +12,9 @@
 }
 .login{
   display: inline-block;
-  float: right;
-}
-.logback{
   background-color:  #D9D7F1;
+  width: 100%;
 }
-
 .var{
   margin: 30px;
   margin-bottom: 0%;
@@ -78,10 +75,7 @@ small{
   padding-right: 10px;
   margin-top: 30px;
 }
-.right{
-  text-align: right;
-  margin: 5px;
-}
+
 .back{
   margin-left: 10px;
   background-color:#FFFDDE;
@@ -145,11 +139,13 @@ small{
 }
 .inlinePic{
   display: inline-block;
-  width: 30%;
-  margin: 1em;
+  width: 25%;
+  margin: 2em;
+  border: 1px solid lightgray;
+  padding-bottom: 1%;
+  background-color: #FFFDDE;
 }
-
-.close{
+.delLike{
   text-align: right;
 }
 .black{
@@ -166,11 +162,11 @@ small{
 }
 .searchI{
   height: 35px;
-  width: 400px;
+  width: 35%;
 }
 .select{
   height: 35px;
-  width: 100px;
+  width: 90px;
 }
 .searchB{
   background-color: #FFFDDE;
@@ -182,6 +178,9 @@ small{
   width: 70%;
   text-align: center;
   margin: auto;
+}
+.detailR{
+  text-align: right;
 }
 .td1{
   width: 30%;
@@ -264,53 +263,4 @@ small{
   display: flex;
   justify-content: center;
   margin-top: 15px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-ul.pagination li {
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-  border: 1px solid #e2e2e2;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-}
-
-ul.pagination li:first-child{
-  border-radius: 5px 0 0 5px;
-}
-
-ul.pagination li:last-child{
-  border-radius: 0 5px 5px 0;
-}
-
-ul.pagination li a {
-  text-decoration: none;
-  color: #337ab7;
-  font-size: 1rem;
-}
-
-ul.pagination li.active a {
-  color: white;
-}
-
-ul.pagination li.active {
-  background-color: #337ab7;
-}
-
-ul.pagination li a:hover,
-ul.pagination li a.active {
-  color: blue;
-}
-
-.page-selection {
-  width: 48px;
-  height: 30px;
-  color: #337ab7;
 }

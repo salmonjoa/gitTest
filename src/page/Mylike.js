@@ -15,16 +15,15 @@ function Mylike(props){
       {
         del.map((a,i)=>
           <div className='inlinePic'>
-            <Card><div className='right'><button className='close' onClick={()=>{
+            <div className='delLike'>
+              <button className='close' onClick={()=>{
               let copy = [...del];
               copy.splice(i, 1);
               setDel(copy);
-            }}> ✖ </button></div> 
-              <img src="./../image/진라면.jpg" width="100%" />
-              <br/>
-              <h4>{ del[i].title}</h4>
-            </Card>
-          </div>
+              }}> ✖ </button></div>
+              <img src="./../image/진라면.jpg" width="100%" /><br/><br/>
+              <h4>{ del[i].title }</h4>
+            </div>
           )
         }
       </div>

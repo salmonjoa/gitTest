@@ -19,13 +19,14 @@ function App() {
   
   return (
     <div>
-      <div className='app'>
-      <h1 className='name' onClick={() => {navigate('/')}}>Recipe(가제)</h1>
-      <div className='login'>
+    <div className='login'>
         <Header />
       </div>
+      <div className='app'>
+      <h1 className='name' onClick={() => {navigate('/')}}>Recipe(가제)</h1>
         <Navbar>
           <Container>
+
             <div className='menubar'>
               <Nav>
                 <Nav.Link className='var' onClick={() => {navigate('/')}}><strong>Home🏠</strong></Nav.Link>

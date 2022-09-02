@@ -27,10 +27,8 @@ function Detail(props) {
       <div className="container">
           <div className='all'>
             <h1 className='nameD'>{infodata.title}</h1>
-            <div className='right'>
-              <div>작성자: {infodata.writer}</div>
-              <div>작성일: {infodata.date}</div>
-            </div>
+              <div className='detailR'>작성자: {infodata.writer}</div>
+              <div className='detailR'>작성일: {infodata.date}</div>
             <div className='middle'>
               <img src='./../image/신라면.jpg' width="100%" /><br/>
             <div className='small'>

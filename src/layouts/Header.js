@@ -12,7 +12,7 @@ const Header = () => {
       <SignUpModal show={SignUp} onHide={() => setSignUp(false)} />
       <SignInModal show={Login} onHide={() => setSignIn(false)} />
       <header>
-        <div className="logback">
+
         <Navbar>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -30,7 +30,8 @@ const Header = () => {
               </Nav>
             </Navbar.Collapse>
         </Navbar>
-        </div>
+       
+
       </header>
     </div>
   );

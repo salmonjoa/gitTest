@@ -8,7 +8,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 import Myate from './Myate'
 
 
-let Mypage = (props) => {
+  let Mypage = (props) => {
   let recipedata = useSelector((state)=>state.tmpdata);
   let navigate = useNavigate();
 
