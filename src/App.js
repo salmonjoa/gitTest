@@ -26,7 +26,6 @@ function App() {
       </div>
         <Navbar>
           <Container>
-            
             <div className='menubar'>
               <Nav>
                 <Nav.Link className='var' onClick={() => {navigate('/')}}><strong>Home🏠</strong></Nav.Link>
