@@ -263,3 +263,11 @@ small{
 .under:hover{
   cursor: pointer;
 }
+.FI{
+  width: 30vw;
+  height: 20vw;
+}
+.phoneImage{
+  width: 100%;
+  height: 100%;
+}

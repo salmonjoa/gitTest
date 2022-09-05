@@ -50,11 +50,11 @@ const Posts = ({ posts, loading, setPosts }) => {
       </div><br/>
 
       {loading && <div className="nameD"><h3> Loading... </h3></div>}
-        {posts.map((post, i) => (
+        {posts.map((post) => (
           <h3 className='list' key={post.id} 
           onClick={()=>{
           navigate('/detail/'+ post.id)
-          }}>{i+1}. {post.title} </h3>
+          }}>{post.id}. {post.title} </h3>
         ))}
     </>
   );

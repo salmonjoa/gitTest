@@ -18,25 +18,44 @@ function List(){
   let [currentPage, setCurrentPage] = useState(1);
   let [postsPerPage, setPostsPerPage] = useState(10);
 
-  // 데이터
+  // 테스트 데이터 경로 두 개
   useEffect(() => {
     const testing = async () => {
     setLoading(true);
     axios.all(
-      [axios.get('http://192.168.0.23:8080/api/dish/get')
-      , axios.get('http://192.168.0.10:8080/api/admin/admin-list')])
+      [axios.get('https://jsonplaceholder.typicode.com/posts')
+      , axios.get('https://jsonplaceholder.typicode.com/photos')])
         .then(axios.spread((result1, result2)=>{
           const conn = [...result1.data, ...result2.data];
           setPosts(conn);
           setLoading(false);
         })
-    )
-    .catch((err) => {console.log(err)});
-    };
-    testing();
-  },[]);
+        )
+        .catch((err) => {console.log(err)});
+      };
+      testing();
+    },[]);
+    console.log(posts)
 
-  console.log(posts)
+  // 진짜 데이터 경로 하나 
+  // useEffect(()=>(
+  //   temp
+  // ),[])
+
+  //   const temp = async () => {
+  //     try {
+  //       const temp = await axios.get("http://192.168.0.23:8080/api/dish/get",{
+  //         headers:{
+  //           'Content-type': 'application/json'
+  //         }
+  //       })
+  //       setPosts(temp.data)
+  //       console.log(test)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+  // console.log(posts)
 
   // indecOf로 각 페이지의 첫번째와 마지막 인덱스 번호 구하기
   const indexOfLast = currentPage * postsPerPage;

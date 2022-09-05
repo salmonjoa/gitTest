@@ -18,40 +18,42 @@ function Detail() {
   let [test, setTest] = useState([]);
   let [loading, setLoading] = useState(false);
 
-  useEffect(()=>(
-    temp
-  ),[])
-
-    const temp = async () => {
-      try {
-        const temp = await axios.get("https://jsonplaceholder.typicode.com/posts",{
-          headers:{
-            'Content-type': 'application/json'
-          }
+  //테스트 데이터 경로 두 개
+  useEffect(() => {
+    const testing = async () => {
+    setLoading(true);
+    axios.all(
+      [axios.get('https://jsonplaceholder.typicode.com/posts')
+      , axios.get('https://jsonplaceholder.typicode.com/photos')])
+        .then(axios.spread((result1, result2)=>{
+          const conn = [...result1.data, ...result2.data];
+          setTest(conn);
+          setLoading(false);
         })
-        setTest(temp.data)
-        console.log(temp.data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
+      )
+    .catch((err) => {console.log(err)});
+    };
+    testing();
+  },[]);
 
-  // useEffect(() => {
-  //   const testing = async () => {
-  //   setLoading(true);
-  //   axios.all(
-  //     [axios.get('https://jsonplaceholder.typicode.com/posts')
-  //     , axios.get('https://jsonplaceholder.typicode.com/photos')])
-  //       .then(axios.spread((result1, result2)=>{
-  //         const conn = [...result1.data, ...result2.data];
-  //         setTest(conn);
-  //         setLoading(false);
+  // 진짜 데이터 경로 하나
+  // useEffect(()=>(
+  //   temp
+  // ),[])
+
+  //   const temp = async () => {
+  //     try {
+  //       const temp = await axios.get("http://192.168.0.23:8080/api/ate/get",{
+  //         headers:{
+  //           'Content-type': 'application/json'
+  //         }
   //       })
-  //   )
-  //   .catch((err) => {console.log(err)});
-  //   };
-  //   testing();
-  // },[]);
+  //       setTest(temp.data)
+  //       console.log(test)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
 
   // 주소 파라미터
   let {id} = useParams();
@@ -65,14 +67,14 @@ function Detail() {
     <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
       <div className="container">
           <div className='all'>
-            {/* <h1 className='nameD'>{moviedata.title}</h1> */}
-              {/* <div className='detailR'>작성자: {infodata.writer}</div> */}
+            {/* <h1 className='nameD'>{testdata.title}</h1> */}
+              {/* <div className='detailR'>작성자: {testdata.userId}</div> */}
               {/* <div className='detailR'>작성일: {infodata.date}</div> */}
             <div className='middle'>
               <img src='./../image/신라면.jpg' width="100%" /><br/>
             <div className='small'>
 
-              {/* <span onClick={(e)=>{
+              <span onClick={(e)=>{
                 e.stopPropagation()
                 setLike(!like)
                 console.log(like)
@@ -80,13 +82,13 @@ function Detail() {
                   {
                     like === true ? '❤️' : '🤍'
                   }
-                  {
+                  {/* {
                     like === true ?
                     infodata.dish_like +1
                     : infodata.dish_like
-                  }
-                </span> */}
-              {/* <span className='small'> 😋{infodata.ate}</span> */}
+                  } */}
+                </span>
+              <span className='small'> 😋{/*infodata.ate*/}</span>
             </div><br/>
             </div>
 
