@@ -14,8 +14,6 @@ import Header from './layouts/Header'
 function App() {
 
   let navigate = useNavigate();
-  let dispatch = useDispatch();
-  let recipedata = useSelector((state)=>state.tmpdata);
   
   return (
     <div>

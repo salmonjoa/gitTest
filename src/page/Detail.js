@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Nav, Button } from 'react-bootstrap';
 import {useState, useEffect} from 'react';
+import axios from 'axios';
 
-function Detail(props) {
+function Detail() {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -11,29 +12,67 @@ function Detail(props) {
   let [레시피, set레시피] = useState('레시피입니다.');
   let [영상, set영상] = useState('url입니다.');
   let [tab, setTab] = useState(0);
-  let recipedata = useSelector((state)=>state.tmpdata);
   let [like, setLike] = useState(false);
 
-  let {id} = useParams();
-  let infodata = recipedata.find(function(info){
-    return info.id == id 
-  })
+  // 데이터 - 한번에 여러 개 가져오기
+  let [test, setTest] = useState([]);
+  let [loading, setLoading] = useState(false);
 
-  
+  useEffect(()=>(
+    temp
+  ),[])
+
+    const temp = async () => {
+      try {
+        const temp = await axios.get("https://jsonplaceholder.typicode.com/posts",{
+          headers:{
+            'Content-type': 'application/json'
+          }
+        })
+        setTest(temp.data)
+        console.log(temp.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  // useEffect(() => {
+  //   const testing = async () => {
+  //   setLoading(true);
+  //   axios.all(
+  //     [axios.get('https://jsonplaceholder.typicode.com/posts')
+  //     , axios.get('https://jsonplaceholder.typicode.com/photos')])
+  //       .then(axios.spread((result1, result2)=>{
+  //         const conn = [...result1.data, ...result2.data];
+  //         setTest(conn);
+  //         setLoading(false);
+  //       })
+  //   )
+  //   .catch((err) => {console.log(err)});
+  //   };
+  //   testing();
+  // },[]);
+
+  // 주소 파라미터
+  let {id} = useParams();
+  let testdata = test.find((info)=>{
+    return info.id == id
+  })
+  console.log(testdata)
+
   return (
-    
     <>
-      <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
+    <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
       <div className="container">
           <div className='all'>
-            <h1 className='nameD'>{infodata.title}</h1>
-              <div className='detailR'>작성자: {infodata.writer}</div>
-              <div className='detailR'>작성일: {infodata.date}</div>
+            {/* <h1 className='nameD'>{moviedata.title}</h1> */}
+              {/* <div className='detailR'>작성자: {infodata.writer}</div> */}
+              {/* <div className='detailR'>작성일: {infodata.date}</div> */}
             <div className='middle'>
               <img src='./../image/신라면.jpg' width="100%" /><br/>
             <div className='small'>
 
-              <span onClick={(e)=>{
+              {/* <span onClick={(e)=>{
                 e.stopPropagation()
                 setLike(!like)
                 console.log(like)
@@ -46,8 +85,8 @@ function Detail(props) {
                     infodata.dish_like +1
                     : infodata.dish_like
                   }
-                </span>
-              <span className='small'> 😋{infodata.ate}</span>
+                </span> */}
+              {/* <span className='small'> 😋{infodata.ate}</span> */}
             </div><br/>
             </div>
 
