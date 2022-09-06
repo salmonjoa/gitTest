@@ -3,13 +3,16 @@ import Information from './Information'
 import Reply from './Reply'
 import Mylike from './Mylike'
 import Gather from './Gather'
-import { useSelector } from "react-redux/es/exports";
+import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Myate from './Myate'
 
 
 let Mypage = () => {
   let navigate = useNavigate();
+
+  const dishData = useSelector((state) => state.allData );
+  console.log(dishData)
 
   return(
     <div>
@@ -28,11 +31,11 @@ let Mypage = () => {
       </div>
 
     <Routes>
-      <Route path="/" element={<div className='floatR'><Gather/></div>}/>
-      <Route path="myinfo" element={<div className='floatR'><Information/></div>}/>
-      <Route path="mylike" element={<div className='floatR'><Mylike/></div>}/>
-      <Route path="myate" element={<div className='floatR'><Myate/></div>}/>
-      <Route path="reply" element={<div className='floatR'><Reply/></div>}/>
+      <Route path="/" element={<div className='floatR'><Gather dishData={dishData} /></div>}/>
+      <Route path="myinfo" element={<div className='floatR'><Information dishData={dishData} /></div>}/>
+      <Route path="mylike" element={<div className='floatR'><Mylike dishData={dishData} /></div>}/>
+      <Route path="myate" element={<div className='floatR'><Myate dishData={dishData} /></div>}/>
+      <Route path="reply" element={<div className='floatR'><Reply dishData={dishData} /></div>}/>
     </Routes>
     </div>
   );

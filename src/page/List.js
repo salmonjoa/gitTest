@@ -1,117 +1,68 @@
 // 페이지only
 
 import './../App.css';
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-// import {paginate}  from 'react-js-pagination';
 import axios from 'axios';
 import Pagination from './../Paging'
 import Posts from './Post';
+import { dish } from './../store/store'
 
 function List(){
+  let dispatch = useDispatch();
 
   // ** 페이지네이션 **
-  let [posts, setPosts] = useState([]);
-  let [loading, setLoading] = useState(false);
   let [currentPage, setCurrentPage] = useState(1);
   let [postsPerPage, setPostsPerPage] = useState(10);
 
-  // 테스트 데이터 경로 두 개
-  useEffect(() => {
-    const testing = async () => {
-    setLoading(true);
-    axios.all(
-      [axios.get('https://jsonplaceholder.typicode.com/posts')
-      , axios.get('https://jsonplaceholder.typicode.com/photos')])
-        .then(axios.spread((result1, result2)=>{
-          const conn = [...result1.data, ...result2.data];
-          setPosts(conn);
-          setLoading(false);
+  // 데이터 경로 하나
+  useEffect(()=>(
+    async () => {
+      try {
+        const temp = await axios.get("http://192.168.0.23:8080/api/dish/get",{
+          headers:{
+            'Content-type': 'application/json'
+          }
         })
-        )
-        .catch((err) => {console.log(err)});
-      };
-      testing();
-    },[]);
-    console.log(posts)
+        dispatch(dish(temp.data))
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  ),[])
 
-  // 진짜 데이터 경로 하나 
-  // useEffect(()=>(
-  //   temp
-  // ),[])
+  // let result = axios.get("http://192.168.0.23:8080/api/dish/get")
+  //   .then((response) => dispatch(dish(response.data)))
+  // console.log(result)
+  
+  let realData = useSelector((state) => state.allData );
+  console.log(realData)
 
-  //   const temp = async () => {
-  //     try {
-  //       const temp = await axios.get("http://192.168.0.23:8080/api/dish/get",{
-  //         headers:{
-  //           'Content-type': 'application/json'
-  //         }
-  //       })
-  //       setPosts(temp.data)
-  //       console.log(test)
-  //     } catch (error) {
-  //       console.log(error)
-  //     }
-  //   }
-  // console.log(posts)
-
-  // indecOf로 각 페이지의 첫번째와 마지막 인덱스 번호 구하기
+  // indexOf로 각 페이지의 첫번째와 마지막 인덱스 번호 구하기
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
-  const currentPosts = (posts) => {
-    let currentPosts = 0;
+  const currentPosts = (realData) => {
+    const currentPosts = 0;
     // slice로 시작번째 ~ 끝-1번째까지를 복사본으로 반환
-    currentPosts = posts.slice(indexOfFirst, indexOfLast);
+    currentPosts = realData.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   };
 
   return (
     <div>
-      <Posts posts={currentPosts(posts)} setPosts={setPosts} loading={loading} />
-        <Pagination
+      <img src={realData[0].mainIMG} ></img>
+      <p> 이수진 이미지파일 테스트중입니다...</p>
+      {/* <Posts realData={currentPosts(realData)} loading={loading}/> */}
+        {/* <Pagination
           postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          totalPosts={realData.length}
           paginate={setCurrentPage}
-        ></Pagination>
+        ></Pagination> */}
     </div>
   )
 }
 
 export default List;
-
-// function List (){
-//   let recipedata = useSelector((state)=>state.tmpdata);
-//  
-//   let [search, setSearch] = useState('');
-//   const [filteredData, setFilteredData] = useState([]);
-//   const [valueState, setValueState] = useState('');
-//   const onChangeHandler = (event) => {
-//     const value = event.target.value
-//     setValueState(value)
-//   }
-
-
-
-  // function handleInput(event) {
-  //   const input = event.target.value;
-  //   const mydata = filteredData.filter((recipe) => {
-  //     if(valueState === '1')
-  //       return recipe.writer.toLowerCase().includes(input.toLowerCase());
-  //     else if(valueState === '2')
-  //       return recipe.date.toLowerCase().includes(input.toLowerCase());
-  //     else
-  //       return recipe.title.toLowerCase().includes(input.toLowerCase());
-  //     });
-  //   if (input === '') {
-  //     setFilteredData(filteredData)
-  //     console.log(filteredData)
-  //   } else {
-  //     setFilteredData(mydata);
-  //   }
-  // }
-
 
 //   return(
 //     <div className='detailList'>

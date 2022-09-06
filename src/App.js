@@ -5,7 +5,7 @@ import Detail from './page/Detail'
 import { useDispatch, useSelector } from 'react-redux'
 import Mypage from './page/Mypage'
 import Mylike from './page/Mylike'
-import EditInfo from './page/EditInfo';
+import EditInfo from './page/EditInfo'
 import List from './page/List'
 import Main from './Main/Main'
 import Square from './Square/Square'
@@ -14,7 +14,6 @@ import Header from './layouts/Header'
 function App() {
 
   let navigate = useNavigate();
-  
   return (
     <div>
     <div className='login'>

@@ -1,8 +1,11 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
+import store from "../store/store";
+import { useSelector, useDispatch } from "react-redux";
 
-function Gather(){
+
+function Gather({ dishData }){
   let navigate = useNavigate();
-
+  
   return (
     <div className='comm'>
       <h2><strong>마이페이지</strong></h2><hr/><br/>

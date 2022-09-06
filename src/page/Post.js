@@ -3,10 +3,11 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Posts = ({ posts, loading, setPosts }) => {
-
+const Posts = ({ haha, loading }) => {
   let navigate = useNavigate();
-
+  
+  let [simple, setSimple] = useState([]);
+  
   const [valueState, setValueState] = useState('');
   const onChangeHandler = (event) => {
     const value = event.target.value
@@ -17,7 +18,7 @@ const Posts = ({ posts, loading, setPosts }) => {
   const handleInput = (event) => {
     const input = event.target.value
     setInputState(input)
-    const filtered = posts.filter((itemList) => {
+    const filtered = haha.filter((itemList) => {
       // if(valueState === '1')
       //   return itemList.title.toUpperCase().includes(input.toUpperCase());
       // else if(valueState === '2')
@@ -27,9 +28,9 @@ const Posts = ({ posts, loading, setPosts }) => {
         return itemList.title.toUpperCase().includes(input.toUpperCase());
     });
     if (input === '') {
-      setPosts(posts)
+      setSimple(haha)
     } else {
-      setPosts(filtered);
+      setSimple(filtered);
     }
   }
 
@@ -50,7 +51,8 @@ const Posts = ({ posts, loading, setPosts }) => {
       </div><br/>
 
       {loading && <div className="nameD"><h3> Loading... </h3></div>}
-        {posts.map((post) => (
+
+        {haha.map((post) => (
           <h3 className='list' key={post.id} 
           onClick={()=>{
           navigate('/detail/'+ post.id)

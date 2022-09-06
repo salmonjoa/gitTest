@@ -1,20 +1,16 @@
-import { useSelector } from "react-redux/es/exports";
-
-function Reply(props){
-  let recipedata = useSelector((state)=>state.tmpdata);
-
+function Reply({dishData}){
   return(
     <>
     <div className='comm'>
       <h2><strong>댓글관리</strong></h2><br/>
       <hr/>
-      {recipedata.map((a, i)=>{
+      {dishData.map((a, i)=>{
         return <div>
           <div className="smallL">
-            <img src="./../image/진라면.jpg" width='150px' />
+            <img src={a.mainIMG} width='100%' />
           </div>
           <div className="smallR">
-            <h4>{recipedata[i].title}</h4>
+            <h4>{a.dish_name}</h4>
             댓글
             <br/>
             댓글작성일
@@ -23,8 +19,6 @@ function Reply(props){
         <hr/>
       </div>
       })}
-      
-
     </div>
       </>
   );

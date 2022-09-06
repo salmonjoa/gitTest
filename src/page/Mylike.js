@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import {Card} from 'react-bootstrap';
-import { useSelector } from "react-redux/es/exports";
+import { Card } from 'react-bootstrap';
 
 
-function Mylike(props){
-  let recipedata = useSelector((state)=>state.tmpdata);
-  let [del, setDel] = useState(recipedata)
+function Mylike({dishData}){
+  let [del, setDel] = useState(dishData)
 
   return (
     <>
@@ -21,8 +19,8 @@ function Mylike(props){
               copy.splice(i, 1);
               setDel(copy);
               }}> ✖ </button></div>
-              <img src="./../image/진라면.jpg" width="100%" /><br/><br/>
-              <h4>{ del[i].title }</h4>
+              <img src={del[i].mainIMG} width="100%" /><br/><br/>
+              <h4>{ del[i].dish_name }</h4>
             </div>
           )
         }

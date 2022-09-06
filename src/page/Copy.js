@@ -4,7 +4,7 @@ import { Nav, Button } from 'react-bootstrap';
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-function Detail() {
+function Copy() {
 
   let dispatch = useDispatch();
   let navigate = useNavigate();
@@ -14,28 +14,64 @@ function Detail() {
   let [tab, setTab] = useState(0);
   let [like, setLike] = useState(false);
 
+  // 데이터 - 한번에 여러 개 가져오기
+  let [test, setTest] = useState([]);
 
+  let [result1, setResult1] = useState([]);
+  let [result2, setResult2] = useState([]);
+  let [loading, setLoading] = useState(false);
+
+  // 진짜 데이터 경로 하나
+  useEffect(()=>(
+    temp
+  ),[])
+
+    const temp = async () => {
+      try {
+        const temp = await axios.get("https://jsonplaceholder.typicode.com/posts",{
+          headers:{
+            'Content-type': 'application/json'
+          }
+        })
+        setTest(temp.data)
+        console.log(test)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+  // 테스트 데이터 경로 두 개
+  // useEffect(() => {
+  //   const testing = async () => {
+  //   setLoading(true);
+  //   axios.all(
+  //     [axios.get('https://jsonplaceholder.typicode.com/posts')
+  //     , axios.get('https://jsonplaceholder.typicode.com/photos')])
+  //       .then(axios.spread((result1, result2)=>{
+  //         const conn = [...result1.data, ...result2.data];
+  //         setPosts(conn);
+  //         setLoading(false);
+  //       })
+  //       )
+  //       .catch((err) => {console.log(err)});
+  //     };
+  //     testing();
+  //   },[]);
+  //   console.log(posts)
 
   // 주소 파라미터
-  let {id} = useParams();
+ let {id} = useParams();
   let testdata = test.find((data) => {
     return data.id = id
   })
-  // let data1 = result1.find((sue)=>{
-  //   return sue.id == id
-  // })
-  // let data2 = result2.find((jin)=>{
-  //   return jin.id == id
-  // })
-   console.log(testdata)
-  // console.log(data2)
+
 
   return (
     <>
     <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
       <div className="container">
           <div className='all'>
-            <h1 className='nameD'>{testdata.title}</h1>
+            <h1 className='nameD'>{test[{id}].title}</h1>
               {/* <div className='detailR'>작성자: {data1.userId}</div> */}
               {/* <div className='detailR'>작성일: {data1.date}</div> */}
             <div className='middle'>
@@ -89,4 +125,4 @@ function TabCom(props){
     [<div>{props.레시피}</div>, <div>{props.댓글}</div>, <div>{props.영상}</div>][props.tab]
     );
 }
-export default Detail;
+export default Copy;

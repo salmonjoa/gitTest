@@ -1,4 +1,4 @@
-function Myate(){
+function Myate({dishData}){
   return (
     <>
       <div className="comm">
