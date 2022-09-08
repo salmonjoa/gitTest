@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import Myate from './Myate'
 
-
 let Mypage = () => {
   let navigate = useNavigate();
 

@@ -18,4 +18,4 @@ export default configureStore({
     reducer: { 
         allData : allData.reducer
     }
-  }) 
+  })

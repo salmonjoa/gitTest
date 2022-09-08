@@ -1,13 +1,14 @@
 // 레시피 목록
 
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { TreeItem, TreeView } from '@material-ui/lab';
 
-const Posts = ({ haha, loading }) => {
+
+const Posts = ({ realData, current }) => {
   let navigate = useNavigate();
-  
+  // current(realData);
   let [simple, setSimple] = useState([]);
-  
   const [valueState, setValueState] = useState('');
   const onChangeHandler = (event) => {
     const value = event.target.value
@@ -15,20 +16,23 @@ const Posts = ({ haha, loading }) => {
   }
 
   const [inputState, setInputState] = useState('');
+
+  useEffect(()=>setSimple(realData),[realData])
+
   const handleInput = (event) => {
     const input = event.target.value
     setInputState(input)
-    const filtered = haha.filter((itemList) => {
-      // if(valueState === '1')
-      //   return itemList.title.toUpperCase().includes(input.toUpperCase());
-      // else if(valueState === '2')
-      //   return itemList.title.toUpperCase().includes(input.toUpperCase())
-      //       || itemList.title.toUpperCase().includes(input.toUpperCase());
-      // else
-        return itemList.title.toUpperCase().includes(input.toUpperCase());
+    console.log(input)  // 검색어 출력
+    const filtered = realData.filter((itemList) => {
+      if(valueState === '1')
+        return itemList.writer.toUpperCase().includes(input.toUpperCase());
+      else if(valueState === '2')
+        return itemList.date.toUpperCase().includes(input.toUpperCase());
+      else
+        return itemList.dish_name.toUpperCase().includes(input.toUpperCase());
     });
     if (input === '') {
-      setSimple(haha)
+      setSimple(realData)
     } else {
       setSimple(filtered);
     }
@@ -40,7 +44,7 @@ const Posts = ({ haha, loading }) => {
       <select defaultValue='0' className='select' onChange={onChangeHandler}>
         <option value='0'>글제목</option>
         <option value='1'>작성자</option>
-        <option value='2'>제목+작성자</option>
+        <option value='2'>작성일</option>
       </select>
 
       <input type='text' className='searchI' onChange={handleInput} placeholder='Search'></input>
@@ -50,14 +54,40 @@ const Posts = ({ haha, loading }) => {
       }}>검색</button>
       </div><br/>
 
-      {loading && <div className="nameD"><h3> Loading... </h3></div>}
 
-        {haha.map((post) => (
-          <h3 className='list' key={post.id} 
-          onClick={()=>{
-          navigate('/detail/'+ post.id)
-          }}>{post.id}. {post.title} </h3>
-        ))}
+      <div className="results">
+        {simple.length > 0 && (
+          <TreeView multiselect>
+          {simple.map((post, i) => {
+            //console.log(simple)
+             return (
+              <TreeItem
+              key={i}
+                // nodeId={}
+                label={
+                  <h3 className='list' key={post.dish_num} 
+                  onClick={()=>{
+                  navigate('/detail/'+ post.dish_num)
+                  }}>
+                  <div className="titleD">
+                    {i+1}. {simple[i].dish_name} 
+                  </div>
+                  <small> ❤️{simple[i].hit}</small>
+                  <small> 😋 백번먹어
+                    {/* {post.ate} */}
+                    </small>
+                  <div className="date">{simple[i].writer} | {simple[i].date}</div>
+                  </h3>
+                  }
+                />
+              );
+            })}
+          </TreeView>
+        )}
+      </div>
+      {/* <Routes>
+        <Route path=":id" element={ <Detail realData={realData}/>}/>
+      </Routes> */}
     </>
   );
 };

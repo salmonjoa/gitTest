@@ -2,7 +2,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Nav, Button } from 'react-bootstrap';
 import {useState, useEffect} from 'react';
-import axios from 'axios';
 
 function Detail() {
 
@@ -14,30 +13,28 @@ function Detail() {
   let [tab, setTab] = useState(0);
   let [like, setLike] = useState(false);
 
-
+  // 데이터 가져오기
+  const dishData = useSelector((state) => state.allData );
+  console.log(dishData);
 
   // 주소 파라미터
   let {id} = useParams();
-  let testdata = test.find((data) => {
-    return data.id = id
+  let dish = dishData.find((data) => {
+    return data.dish_num = id
   })
-  // let data1 = result1.find((sue)=>{
-  //   return sue.id == id
-  // })
-  // let data2 = result2.find((jin)=>{
-  //   return jin.id == id
-  // })
-   console.log(testdata)
-  // console.log(data2)
+
+// useEffect(()=>(
+//   console.log(dishData)
+// ),[])
 
   return (
     <>
     <Button className='back' variant="light" onClick={()=>{navigate(-1)}}>{'<<'} 목록보기</Button>
       <div className="container">
           <div className='all'>
-            <h1 className='nameD'>{testdata.title}</h1>
-              {/* <div className='detailR'>작성자: {data1.userId}</div> */}
-              {/* <div className='detailR'>작성일: {data1.date}</div> */}
+            <h1 className='nameD'>{dish.dish_name}</h1>
+              <div className='detailR'>작성자: {dish.writer}</div>
+              <div className='detailR'>작성일: {dish.date}</div>
             <div className='middle'>
               {/* <img src={data2.url} width="100%" /><br/> */}
             <div className='small'>
@@ -50,11 +47,11 @@ function Detail() {
                   {
                     like === true ? '❤️' : '🤍'
                   }
-                  {/* {
+                  {
                     like === true ?
-                    infodata.dish_like +1
-                    : infodata.dish_like
-                  } */}
+                    dish.hit +1
+                    : dish.hit
+                  }
                 </span>
               <span className='small'> 😋{/*infodata.ate*/}</span>
             </div><br/>
