@@ -149,6 +149,23 @@ small{
 .delLike{
   text-align: right;
 }
+.oneline{
+  display: inline-block;
+}
+.outline{
+  float: right;
+}
+.arrReply{
+  display: inline-block;
+  text-align: right;
+  font-size: 7px;
+  font-style: italic;
+}
+.delrepB{
+  font-size: 10px;
+  background-color: #E7FBBE;
+  border-color: #E7FBBE;
+}
 .black{
   color: black;
 }
@@ -174,7 +191,17 @@ small{
   background-color: #FFFDDE;
   height: 35px;
   width: 60px;
-  border-style:outset;
+  border-color: #FFFDDE;
+}
+.replyB{
+  background-color: #FFFDDE;
+  height: 40px;
+  border-color: #FFFDDE;
+  width: 15%;
+}
+.replyTab{
+  width: 80%;
+  height: 40px;
 }
 .editCenter, .table, .detailList{
   width: 70%;

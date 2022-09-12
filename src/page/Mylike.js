@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 
-function Mylike({dishData}){
-  let [del, setDel] = useState(dishData)
-
+function Mylike({data}){
+  let [del, setDel] = useState(data)
+  console.log(del)
+  
   return (
     <>
       <div className='comm'>

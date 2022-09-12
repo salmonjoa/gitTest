@@ -1,40 +1,14 @@
-// 페이지only
-
 import './../App.css';
-import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import axios from 'axios';
 import Pagination from './../Paging';
 import Posts from './Post';
-import { dish } from './../store/store';
 
-
-function List(){
-  let dispatch = useDispatch();
+function List({realData}){
 
   // ** 페이지네이션 **
   let [currentPage, setCurrentPage] = useState(1);
   let [postsPerPage, setPostsPerPage] = useState(5);
 
-  // 데이터 경로 하나
-  useEffect(()=>(
-    async () => {
-      try {
-        const temp = await axios.get("http://192.168.0.23:8080/api/dish/get",{
-          headers:{
-            'Content-type': 'application/json'
-          }
-        })
-        dispatch(dish(temp.data))
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  ),[])
-
-
-  
-  let realData = useSelector((state) => state.allData );
 
   // indexOf로 각 페이지의 첫번째와 마지막 인덱스 번호 구하기
   const indexOfLast = currentPage * postsPerPage;

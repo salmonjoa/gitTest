@@ -6,6 +6,7 @@ import { TreeItem, TreeView } from '@material-ui/lab';
 
 
 const Posts = ({ realData, current }) => {
+  
   let navigate = useNavigate();
   // current(realData);
   let [simple, setSimple] = useState([]);
@@ -56,7 +57,7 @@ const Posts = ({ realData, current }) => {
 
 
       <div className="results">
-        {simple.length > 0 && (
+        {simple?.length > 0 && (
           <TreeView multiselect>
           {simple.map((post, i) => {
             //console.log(simple)
@@ -67,9 +68,11 @@ const Posts = ({ realData, current }) => {
                 label={
                   <h3 className='list' key={post.dish_num} 
                   onClick={()=>{
-                  navigate('/detail/'+ post.dish_num)
+                  // navigate('/detail/'+ post.dish_num) 더미데이터주의
+                  navigate('/detail/'+ post.id)
                   }}>
                   <div className="titleD">
+                  <h3>**더미데이터{simple[i].id}**</h3>
                     {i+1}. {simple[i].dish_name} 
                   </div>
                   <small> ❤️{simple[i].hit}</small>
